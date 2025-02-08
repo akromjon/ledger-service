@@ -1,0 +1,131 @@
+openapi: 3.0.0
+info:
+  title: Multi-Currency Ledger API
+  description: API for managing ledgers, transactions, and balances
+  version: 1.0.0
+servers:
+  - url: localhost:8080/api
+
+paths:
+  /ledgers:
+    post:
+      summary: Create a new ledger
+      tags:
+        - Ledgers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                currency:
+                  type: string
+                  example: USD
+      responses:
+        '201':
+          description: Ledger created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    example: some-uuid
+                  currency:
+                    type: string
+                    example: USD
+                  created_at:
+                    type: string
+                    example: 2024-02-01T12:00:00Z
+
+  /transactions:
+    post:
+      summary: Record a new transaction
+      tags:
+        - Transactions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ledger_id:
+                  type: string
+                  example: some-uuid
+                type:
+                  type: string
+                  enum: [debit, credit]
+                  example: credit
+                amount:
+                  type: number
+                  example: 100.50
+                currency:
+                  type: string
+                  example: USD
+      responses:
+        '201':
+          description: Transaction recorded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    example: some-uuid
+                  ledger_id:
+                    type: string
+                    example: some-uuid
+                  type:
+                    type: string
+                    example: credit
+                  amount:
+                    type: number
+                    example: 100.50
+                  currency:
+                    type: string
+                    example: USD
+                  created_at:
+                    type: string
+                    example: 2024-02-01T12:00:00Z
+
+  /balances/{ledgerId}:
+    get:
+      summary: Retrieve ledger balance
+      tags:
+        - Balances
+      parameters:
+        - name: ledgerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Balance retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    currency:
+                      type: string
+                      example: USD
+                    balance:
+                      type: number
+                      example: 150.00
+        '404':
+          description: Ledger not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Ledger not found

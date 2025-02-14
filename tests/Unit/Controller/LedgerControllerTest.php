@@ -38,7 +38,7 @@ class LedgerControllerTest extends TestCase
 
     #[Test]
     #[DataProvider('validCurrencies')]
-    public function test_can_create_ledger_with_valid_currency($currency)
+    public function test_can_create_ledger_with_valid_currency($currency):void
     {
         $response = $this->postJson('/api/ledgers', [
             'currency' => $currency
@@ -58,7 +58,7 @@ class LedgerControllerTest extends TestCase
 
     #[Test]
     #[DataProvider('invalidCurrencies')]
-    public function test_cannot_create_ledger_with_invalid_currency($currency)
+    public function test_cannot_create_ledger_with_invalid_currency($currency): void
     {
         $response = $this->postJson('/api/ledgers', [
             'currency' => $currency

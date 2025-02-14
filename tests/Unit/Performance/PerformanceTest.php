@@ -12,7 +12,7 @@ class PerformanceTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_application_handles_1000_transactions_per_minute()
+    public function test_application_handles_1000_transactions_per_minute():void
     {
         $ledger = Ledger::create(['uuid' => Str::uuid(), 'currency' => Currency::USD->value]);
 

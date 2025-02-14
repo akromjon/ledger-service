@@ -14,11 +14,11 @@ class LedgerBalanceTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_can_retrieve_correct_balances_by_currency()
+    public function test_can_retrieve_correct_balances_by_currency(): void
     {
         $ledger = Ledger::create(['currency' => Currency::USD->value]);
 
-   
+
         Transaction::create([ 'ledger_id' => $ledger->id, 'type' => TransactionType::CREDIT->value, 'amount' => 200, 'currency' => Currency::USD->value]);
         Transaction::create([ 'ledger_id' => $ledger->id, 'type' => TransactionType::DEBIT->value, 'amount' => 50, 'currency' => Currency::USD->value]);
         Transaction::create([ 'ledger_id' => $ledger->id, 'type' => TransactionType::CREDIT->value, 'amount' => 100, 'currency' => Currency::BTC->value]);

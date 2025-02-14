@@ -33,7 +33,7 @@ class TransactionControllerTest extends TestCase
     }
 
     #[DataProvider('validTransactions')]
-    public function test_can_create_transaction_with_valid_data($type, $amount, $currency)
+    public function test_can_create_transaction_with_valid_data($type, $amount, $currency):void
     {
         $ledger = Ledger::create([
             'currency' => Currency::USD->value
@@ -69,7 +69,7 @@ class TransactionControllerTest extends TestCase
     }
 
     #[DataProvider('invalidTransactions')]
-    public function test_cannot_create_transaction_with_invalid_data($type, $amount, $currency)
+    public function test_cannot_create_transaction_with_invalid_data($type, $amount, $currency): void
     {
         $ledger = Ledger::create(['currency' => Currency::USD->value]);
 

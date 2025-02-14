@@ -14,7 +14,7 @@ class BalanceControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_can_retrieve_correct_balances_by_currency()
+    public function test_can_retrieve_correct_balances_by_currency():void
     {
         $ledger = Ledger::create(['uuid' => Str::uuid(), 'currency' => Currency::USD->value]);
 
@@ -32,7 +32,7 @@ class BalanceControllerTest extends TestCase
                  ]);
     }
 
-    public function test_returns_404_if_ledger_not_found()
+    public function test_returns_404_if_ledger_not_found():void
     {
         $response = $this->getJson("/api/balances/" . Str::uuid());
 

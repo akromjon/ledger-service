@@ -28,7 +28,7 @@ class Ledger extends Model
         return $this->hasMany(Transaction::class);
     }
 
-    public function transactionsByCurrency():Collection
+    public function transactionsByCurrency(): Collection
     {
         return $this->transactions()
             ->select('currency', DB::raw('SUM(CASE WHEN type = "credit" THEN amount ELSE -amount END) as balance'))

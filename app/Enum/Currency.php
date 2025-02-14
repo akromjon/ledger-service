@@ -7,5 +7,5 @@ enum Currency: string
     case USD = "USD";
     case GBP = "GBP";
     case BTC = "BTC";
-    case UZS="UZS";
+    case UZS = "UZS";
 }
